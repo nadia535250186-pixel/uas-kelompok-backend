@@ -42,6 +42,16 @@ class AuthController extends Controller
             return redirect('/profile/' . $request->username);
         }
 
-        return back()->with('error', 'Login gagal');
+        return back()->with('error', 'Login gagal, periksa kembali username dan password Anda.');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::logout();
+
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        return redirect('/login');
     }
 }
