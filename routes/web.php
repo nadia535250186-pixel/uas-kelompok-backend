@@ -59,9 +59,6 @@ Route::post('/logout', [AuthController::class, 'logout']);
 
 Route::get('/profile/{username}', [UserController::class, 'show'])->middleware('auth');
 
-
-
->>>>>>> greg-auth
 Route::get('/loyalty', function () {
     $loyalties = Loyalty::all();
     return view('loyalty.index', compact('loyalties'));
