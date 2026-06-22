@@ -116,6 +116,7 @@ Route::post('/transactions', 'App\Http\Controllers\TransactionController@store')
 
 Route::get('transactions/{userId}', 'App\Http\Controllers\HistoryController@show')->name('transactions.history');
 
+//fitur delete
 Route::delete('transactions/{id}', function ($id) {
     \App\Models\Transaction::destroy($id);
     return redirect()->back();
