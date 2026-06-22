@@ -4,6 +4,9 @@ use App\Models\Menu;
 use App\Models\Loyalty;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\TransactionController;
+use App\Http\Controllers\HistoryController;
+
 
 Route::get('/', function () {
     return redirect('/menu');
@@ -43,6 +46,7 @@ Route::post('/menu/update/{id}', function (Request $request, $id) {
 
     return redirect('/menu');
 });
+
 
 Route::get('/loyalty', function () {
     $loyalties = Loyalty::all();
@@ -88,4 +92,17 @@ Route::get('/loyalty/delete/{id}', function ($id) {
     }
 
     return redirect('/loyalty');
+});
+
+Route::get('/transactions', function() {
+    return view('transactions.create');
+}); 
+
+Route::post('/transactions', 'App\Http\Controllers\TransactionController@store')->name('transactions.store');
+
+Route::get('transactions/{userId}', 'App\Http\Controllers\HistoryController@show')->name('transactions.history');
+
+Route::delete('transactions/{id}', function ($id) {
+    \App\Models\Transaction::destroy($id);
+    return redirect()->back();
 });
