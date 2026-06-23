@@ -3,6 +3,9 @@
 use App\Models\Menu;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
+use App\Http\Controllers\RewardController;
+use App\Http\Controllers\RedeemController;
+
 
 Route::get('/menu', function () {
     $menu = Menu::all();
@@ -37,4 +40,10 @@ Route::post('/menu/update/{id}', function (Request $request, $id) {
     ]);
 
     return redirect('/menu');
+});
+
+Route::get('/rewards', [RewardController::class, 'index']);
+Route::post('/redeem', [RedeemController::class, 'store']);
+Route::get('/', function () {
+    return redirect('/rewards');
 });
